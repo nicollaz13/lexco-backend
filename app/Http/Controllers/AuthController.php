@@ -51,6 +51,14 @@ class AuthController extends Controller
         'user' => $user,
     ], 201);
 }
+/**
+ * Autenticar usuario y generar token de acceso.
+ * Protegido por middleware de límite de sesiones.
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @return \Illuminate\Http\JsonResponse
+ * @author Nicolás
+ */
 public function login(Request $request){
     //revisa que los espacios no esten vacios
     $request->validate([

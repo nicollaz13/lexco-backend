@@ -79,6 +79,14 @@ class UserController extends Controller
             'data' => $user
         ], 200);
     }
+    /**
+    * Actualizar datos o rol de un usuario.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  int  $id
+    * @return \Illuminate\Http\JsonResponse
+    * @author Nicolás
+    */
 
     public function update(Request $request, string $id)
     {
