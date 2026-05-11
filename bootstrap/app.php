@@ -28,9 +28,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'es_admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'limite_sesiones' => \App\Http\Middleware\LimitActiveSessions::class,
         ]);
         
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();
+    

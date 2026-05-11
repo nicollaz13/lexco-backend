@@ -7,8 +7,13 @@ use App\Models\User;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
+ * Realizar la compra de un producto y descontar stock.
+ * Purchase
+ * @param  \Illuminate\Http\Request  $request
+ * @return \Illuminate\Http\JsonResponse
+ * @author Nicolas hernandez
+ * @since 2024/05
+ */
     public function index()
     {
         //todos los usuarios de la base de datos

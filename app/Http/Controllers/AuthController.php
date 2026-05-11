@@ -89,7 +89,7 @@ public function login(Request $request){
  *
  * @param Request $request
  * @return \Illuminate\Http\JsonResponse
- * @author Tu Nombre
+ * @author Nicolas hernandez
  * @since 2026/05
  */
 public function logout(Request $request)

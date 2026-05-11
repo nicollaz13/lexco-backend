@@ -5,11 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
+
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+/**
+ * Realizar la compra de un producto y descontar stock.
+ * 
+ * @param  \Illuminate\Http\Request  $request
+ * @return \Illuminate\Http\JsonResponse
+ * @author Nicolas hernandez
+ * @since 2024/05
+ */
     public function index()
     {
         //trae todo de la tabla
@@ -17,9 +23,11 @@ class ProductController extends Controller
         return response()->json(['products' => $products], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+/**
+ * Almacena un nuevo registro.
+ * @param \Illuminate\Http\Request $request
+ * @return \Illuminate\Http\JsonResponse
+ */
     public function store(Request $request)
     {
         // revisa la cantidad de productos
@@ -90,4 +98,35 @@ class ProductController extends Controller
         $product->delete();
         return response()->json(['message' => 'Producto eliminado exitosamente'], 200);
     }
+
+
+public function purchase(Request $request){
+
+    //validad entrada
+    $request->validate([
+        'product_id' => 'required|exists:products,id',
+        'quantity' => 'required|integer|min:1',
+    ]);
+
+    $product = \App\Models\Product::find($request->product_id);
+
+    //si no hay suficiente stock, se devuelve un error
+    if($product->stock < $request->quantity){
+        return response()->json(['message' => 'Stock insuficiente'], 400);
+    }
+    //descontar el stock
+    $product->stock -= $request->quantity;
+    $product->save();
+
+    return response()->json(['message' => 'Compra realizada exitosamente',
+                             'data' =>[
+                                'product_id' => $product->id,
+                                'quantity' => $request->quantity,
+                                'new_stock' => $product->stock
+                             ]
+                            ], 200);
+
 }
+}
+
+
