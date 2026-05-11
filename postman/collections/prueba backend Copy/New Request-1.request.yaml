@@ -1,0 +1,12 @@
+$kind: http-request
+name: New Request
+url: http://127.0.0.1:8000/api/users
+method: GET
+headers:
+  Accept: application/json
+  Content-Type: application/json
+auth:
+  type: bearer
+  credentials:
+    token: 20|R9j8PXyW5fMieGglYiiTQjO0n67ZDOpqAQcJLmGa0b03e36c
+order: 1719492401944327

@@ -1,0 +1,17 @@
+$kind: http-request
+name: http://127.0.0.1:8000/api/users/4
+url: http://127.0.0.1:8000/api/login
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \    \"email\":\"admin@lexco.com\",\r
+
+    \    \"password\":\"Password123!\"\r
+
+    }"
+order: 1000

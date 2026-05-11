@@ -1,0 +1,15 @@
+$kind: http-request
+name: New Request
+url: http://127.0.0.1:8000/api/users/6
+method: PUT
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: json
+  content: ""
+auth:
+  type: bearer
+  credentials:
+    token: 20|R9j8PXyW5fMieGglYiiTQjO0n67ZDOpqAQcJLmGa0b03e36c
+order: 395903253873552
