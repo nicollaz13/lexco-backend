@@ -53,19 +53,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'name' => 'string|max:255',
-            'price' => 'numeric|min:0',
-            'stock' => 'integer|min:0',
-        ]);
 
-        // 2. El Buscador por su ID
+
+        // El Buscador por su ID
         $product = Product::findOrFail($id);
 
-        // 3. El "Cambio": Tomamos la nueva información y sobreescribimos la vieja
+        // El "Cambio": Tomamos la nueva información y sobreescribimos la vieja
         $product->update($request->all());
 
-        // 4. La "Confirmación": Le decimos a Postman que todo salió bien
+        // La "Confirmación": Le decimos a Postman que todo salió bien
         return response()->json([
             'message' => '¡Producto actualizado con éxito!',
             'data' => $product
