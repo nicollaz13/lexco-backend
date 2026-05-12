@@ -29,12 +29,18 @@ Route::middleware(['auth:sanctum', 'limite_sesiones'])->group(function () {
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/{id}', [ProductController::class, 'show']);
     Route::post('/products/purchase', [ProductController::class, 'purchase']); 
+    
 
     // --- SOLO ADMIN ---
     Route::middleware('es_admin')->group(function () {
         Route::post('/products', [ProductController::class, 'store']);
         Route::put('/products/{id}', [ProductController::class, 'update']);
         Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+        
+    });
+    Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/users', [UserController::class, 'index']);
     });
 });
     

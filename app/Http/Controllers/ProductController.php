@@ -20,7 +20,7 @@ class ProductController extends Controller
     {
         //trae todo de la tabla
         $products = Product::all();
-        return response()->json(['products' => $products], 200);
+        return response()->json($products);
     }
 
 /**

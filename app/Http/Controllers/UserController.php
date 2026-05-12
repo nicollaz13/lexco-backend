@@ -20,10 +20,7 @@ class UserController extends Controller
         $users = User::all();
 
         //devolver en formato json
-        return response()->json([
-            'message' => 'Usuarios obtenidos exitosamente',
-            'data' => $users
-        ], 200);
+        return response()->json(User::all());
     }
 
     /**
