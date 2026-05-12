@@ -1,16 +1,16 @@
 <?php
-
-use illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
-// rutas publicas 
-Route::get('/', [ProductController::class, 'index']);
-Route::get('/{id}', [ProductController::class, 'show']);
-
-// rutas privadas
-Route::middleware(['auth:sanctum', 'es_admin'])->group(function () {
-    Route::post('/', [ProductController::class, 'store']);
-    Route::put('/{id}', [ProductController::class, 'update']);
-    Route::delete('/{id}', [ProductController::class, 'destroy']);
+// Quitamos 'limite_sesiones' de aquí
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/{id}', [ProductController::class, 'show']);
+    Route::post('/purchase', [ProductController::class, 'purchase']);
+    
+    Route::middleware('es_admin')->group(function () {
+        Route::post('/', [ProductController::class, 'store']);
+        Route::put('/{id}', [ProductController::class, 'update']);
+        Route::delete('/{id}', [ProductController::class, 'destroy']);
+    });
 });
-

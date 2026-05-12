@@ -66,7 +66,7 @@ public function login(Request $request){
         'password' => 'required',
     ]);
     // Busca el usuario por email
-    $user = user::where('email', $request->email)->first();
+    $user = User::where('email', $request->email)->first();
     // se revisa si ya existe y la contraseña es correcta
     if (!$user || !Hash::check($request->password, $user->password)) {
         return response()->json(['message' => 'Credenciales inválidas'], 401);
@@ -110,5 +110,44 @@ public function logout(Request $request)
     return response()->json([
         'message' => 'Sesión cerrada. ¡Vuelve pronto!'
     ])->withCookie($cookie);
+}
+
+/**
+ * Obtener los datos del perfil del usuario autenticado.
+ *
+ * @param Request $request
+ * @return \Illuminate\Http\JsonResponse
+ * @author nicolas hernandez
+ * @since 2026/05
+ */
+public function profile(Request $request)
+{
+    return response()->json($request->user());
+}
+
+/**
+ * Actualizar el nombre del perfil del usuario autenticado.
+ *
+ * @param Request $request
+ * @return \Illuminate\Http\JsonResponse
+ * @author nicolas hernandez
+ * @since 2026/05
+ */
+public function updateProfile(Request $request)
+{
+    $user = $request->user();
+    
+    $request->validate([
+        'name' => 'required|string|max:255',
+    ]);
+
+    $user->update([
+        'name' => $request->name
+    ]);
+
+    return response()->json([
+        'message' => 'Perfil actualizado con éxito',
+        'user' => $user
+    ]);
 }
 }
